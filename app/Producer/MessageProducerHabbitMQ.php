@@ -18,7 +18,7 @@
         public function produzir(array $message): void { 
             try {
                 $this->channel->exchange_declare("laravel_messages","direct");    
-                $this->channel->queue_declare("laravel_messages_queue");
+                $this->channel->queue_declare("laravel_messages_queue",true,true,false,false,false);
                 $this->channel->queue_bind("laravel_messages_queue","laravel_messages","laravel");
                 
                 $message = new AMQPMessage(json_encode($message));
